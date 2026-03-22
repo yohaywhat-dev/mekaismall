@@ -3,7 +3,7 @@ import discord
 from discord.ext import commands
 from config import TOKEN, GUILD_ID
 from keep_alive import keep_alive
-from decision_maker import setup as setup_decide
+#from decision_maker import setup as setup_decide
 
 # ---------- Bot 設定 ----------
 intents = discord.Intents.default()
@@ -12,7 +12,7 @@ intents.members = True
 intents.reactions = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-setup_decide(bot)
+#setup_decide(bot)
 
 # ---------- 載入 Cogs ----------
 async def load_cogs():
