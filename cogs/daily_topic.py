@@ -2,7 +2,8 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord import app_commands
-from datetime import datetime, time, timedelta
+import datetime
+from datetime import time, timedelta
 from config import GUILD_ID, TOPIC_CHANNEL
 from daily_topic_manager import get_today_topic
 
@@ -37,9 +38,9 @@ class DailyTopic(commands.Cog):
 
         while not self.bot.is_closed():
             try:
-                now = datetime.utcnow()
+                now = datetime.datetime.utcnow()
                 target = time(0, 0)            # 台灣 08:00 = UTC 00:00
-                next_run = datetime.combine(now.date(), target)
+                next_run = datetime.datetime.combine(now.date(), target)
                 if now >= next_run:
                     next_run += timedelta(days=1)
 
