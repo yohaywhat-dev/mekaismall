@@ -38,10 +38,10 @@ class DailyTopic(commands.Cog):
         while not self.bot.is_closed():
             try:
                 now = datetime.datetime.utcnow()
-                target = time(0, 0)            # 台灣 08:00 = UTC 00:00
+                target = datetime.time(0, 0)            # 台灣 08:00 = UTC 00:00
                 next_run = datetime.datetime.combine(now.date(), target)
                 if now >= next_run:
-                    next_run += timedelta(days=1)
+                    next_run += datetime.timedelta(days=1)
 
                 wait_sec = (next_run - now).total_seconds()
                 print(f"下次主題發布：{next_run} UTC（{wait_sec:.0f} 秒後）")
