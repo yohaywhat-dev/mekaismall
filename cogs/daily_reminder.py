@@ -1,5 +1,6 @@
 import asyncio
 import discord
+import random
 from discord.ext import commands
 from datetime import datetime, time, timedelta
 from config import CHANNEL_ID, ROLE_ID
@@ -16,7 +17,18 @@ class DailyReminder(commands.Cog):
     async def cog_unload(self):
         if self._task:
             self._task.cancel()
-
+# ---------- 在類別內定義隨機訊息清單 ----------
+REMINDER_MESSAGES = [
+    "別人每天都在進步，就你在退步。",
+    "你畫圖這麼醜就是因為都沒在練習。",
+    "花十分鐘練習一下很難嗎？",
+    "今天也想偷懶？幾天了？",
+    "我看你很有天賦，天賦不練習就只是廢物。",
+    "你的筆正在冷宮發霉，它問你什麼時候要翻它牌子。",
+    "你不是沒時間，你只是沒心。",
+    "今天不練習，明天變垃圾。",
+    "你的基本功醜到哭喔。"
+]
     # ---------- 背景迴圈 ----------
     async def _reminder_loop(self):
         await self.bot.wait_until_ready()
@@ -45,7 +57,8 @@ class DailyReminder(commands.Cog):
                 print(f"下次提醒：{next_run} UTC（{wait_sec:.0f} 秒後）")
                 await asyncio.sleep(wait_sec)
 
-                await channel.send(f"{role.mention} 請...記得...打卡...！")
+                random_msg = random.choice(REMINDER_MESSAGES)
+                await channel.send(f"{role.mention} {random_msg}")
                 print("✅ 已發送每日提醒")
 
             except asyncio.CancelledError:
