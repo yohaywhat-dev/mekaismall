@@ -12,8 +12,8 @@ class DailyTopic(commands.Cog):
         self.bot = bot
         self._task: asyncio.Task | None = None
 
-     #async def cog_load(self):
-        #self._task = self.bot.loop.create_task(self._topic_loop())
+    async def cog_load(self):
+        self._task = self.bot.loop.create_task(self._topic_loop())
 
     async def cog_unload(self):
         if self._task:
@@ -60,7 +60,7 @@ class DailyTopic(commands.Cog):
                 await asyncio.sleep(3600)
 
     # ---------- Slash Command ----------
-    @app_commands.command(name="supertoday", description="查看今日速寫主題")
+    @app_commands.command(name="today", description="查看今日速寫主題")
     async def today(self, interaction: discord.Interaction):
             # 先回應 Discord：我收到了，給我一點時間
         await interaction.response.defer() 
