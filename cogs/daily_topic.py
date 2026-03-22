@@ -12,8 +12,8 @@ class DailyTopic(commands.Cog):
         self.bot = bot
         self._task: asyncio.Task | None = None
 
-    ＃ async def cog_load(self):
-        ＃ self._task = self.bot.loop.create_task(self._topic_loop())
+     #async def cog_load(self):
+        #self._task = self.bot.loop.create_task(self._topic_loop())
 
     async def cog_unload(self):
         if self._task:
