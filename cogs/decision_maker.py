@@ -30,6 +30,7 @@ class DecisionMaker(commands.Cog):
         await interaction.response.send_message(
             f" 從「{all_options_str}」中...\n 選 **{selected}** 就對了！"
         )
+        
 # 這是在 main.py 呼叫 load_extension 時會執行的函式
 async def setup(bot: commands.Bot):
     await bot.add_cog(DecisionMaker(bot))
