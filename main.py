@@ -19,6 +19,7 @@ async def load_cogs():
     await bot.load_extension("cogs.reaction_roles")
     await bot.load_extension("cogs.daily_reminder")
     await bot.load_extension("cogs.daily_topic")
+    await bot.load_extension("decision_maker")
 
 # ---------- on_ready ----------
 @bot.event
