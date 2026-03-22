@@ -44,7 +44,13 @@ async def on_ready():
     # 同步 Slash Commands - 優先嘗試伺服器同步，失敗則全局同步
     sync_success = False
     try:
-        await bot.tree.sync(guild=discord.Object(id=GUILD_ID))
+        target_guild = discord.Object(id=int(GUILD_ID)) # 這裡加上 int()
+        
+        # 建議在同步前先做一次 copy_global_to，確保 Cogs 裡的指令被抓進來
+        bot.tree.copy_global_to(guild=target_guild)
+        
+        await bot.tree.sync(guild=target_guild)
+        print(f"✅ Slash Commands 已同步！數量：{len(synced)} 個")
         print(f"✅ Slash Commands 已同步到伺服器 {GUILD_ID}")
         sync_success = True
     except Exception as e:
