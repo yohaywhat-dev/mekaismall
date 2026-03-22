@@ -1,6 +1,7 @@
 import asyncio
 import discord
 from discord.ext import commands
+from discord import app_commands
 from datetime import datetime, time, timedelta
 from config import GUILD_ID, TOPIC_CHANNEL
 from daily_topic_manager import get_today_topic
