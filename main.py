@@ -47,7 +47,7 @@ async def on_ready():
         target_guild = discord.Object(id=int(GUILD_ID)) # 這裡加上 int()
         
         # 建議在同步前先做一次 copy_global_to，確保 Cogs 裡的指令被抓進來
-        bot.tree.copy_global_to(guild=target_guild)
+        #bot.tree.copy_global_to(guild=target_guild)
         
         await bot.tree.sync(guild=target_guild)
         print(f"✅ Slash Commands 已同步！數量：{len(synced)} 個")
