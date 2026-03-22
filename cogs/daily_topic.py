@@ -61,7 +61,7 @@ class DailyTopic(commands.Cog):
 
     # ---------- Slash Command ----------
     @app_commands.command(name="supertoday", description="查看今日速寫主題")
-        async def today(self, interaction: discord.Interaction):
+    async def today(self, interaction: discord.Interaction):
             # 先回應 Discord：我收到了，給我一點時間
             await interaction.response.defer() 
             
@@ -70,7 +70,7 @@ class DailyTopic(commands.Cog):
                 # 使用 followup 發送，這樣就算超過 3 秒也沒關係
                 await interaction.followup.send(f"🎨 今日速寫主題是：**{topic}** 🎨")
             except Exception as e:
-                await interaction.followup.send(f"發生錯誤：{e}")
+                await interaction.followup.send(f"發生錯誤：{e}")    
 
 
 async def setup(bot: commands.Bot):
