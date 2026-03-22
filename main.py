@@ -27,6 +27,15 @@ async def on_ready():
     print(f"✅ 已登入：{bot.user}")
     print(f"監控伺服器 ID: {GUILD_ID}")
 
+# --- 加入這段檢查 ---
+    # 檢查 Tree 裡面到底抓到了哪些指令
+    all_commands = bot.tree.get_commands() 
+    print(f"🔍 目前 Tree 內的指令清單: {[cmd.name for cmd in all_commands]}")
+    
+    if not all_commands:
+        print("❌ 警告：Tree 是空的！請檢查指令定義位置。")
+        
+    
     guild = bot.get_guild(GUILD_ID)
     if guild:
         print(f"🤖 機器人暱稱: {guild.me.display_name}")
