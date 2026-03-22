@@ -60,7 +60,7 @@ class DailyTopic(commands.Cog):
                 await asyncio.sleep(3600)
 
     # ---------- Slash Command ----------
-    @app_commands.command(name="today", description="查看今日速寫主題")
+    @app_commands.command(name="supertoday", description="查看今日速寫主題")
     async def today(self, interaction: discord.Interaction):
         topic = get_today_topic()
         await interaction.response.send_message(f"🎨 今日速寫主題是：**{topic}** 🎨")
