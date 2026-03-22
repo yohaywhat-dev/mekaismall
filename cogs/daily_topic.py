@@ -2,8 +2,7 @@ import asyncio
 import discord
 from discord.ext import commands
 from discord import app_commands
-import datetime
-from datetime import time, timedelta
+import datetime  # 保持這個
 from config import GUILD_ID, TOPIC_CHANNEL
 from daily_topic_manager import get_today_topic
 
