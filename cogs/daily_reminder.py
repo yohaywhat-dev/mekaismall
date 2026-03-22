@@ -5,7 +5,6 @@ from discord.ext import commands
 from datetime import datetime, time, timedelta
 from config import CHANNEL_ID, ROLE_ID
 
-
 class DailyReminder(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
@@ -17,22 +16,24 @@ class DailyReminder(commands.Cog):
     async def cog_unload(self):
         if self._task:
             self._task.cancel()
-# ---------- 在類別內定義隨機訊息清單 ----------
-REMINDER_MESSAGES = [
-    "別人每天都在進步，就你在退步。",
-    "你畫圖這麼醜就是因為都沒在練習。",
-    "花十分鐘練習一下很難嗎？",
-    "今天也想偷懶？幾天了？",
-    "我看你很有天賦，天賦不練習就只是廢物。",
-    "你的筆正在冷宮發霉，它問你什麼時候要翻它牌子。",
-    "你不是沒時間，你只是沒心。",
-    "今天不練習，明天變垃圾。",
-    "你這骨架，竟比那安嬪的嗓子還要難堪，還不快去練練！",
-    "這幾日不打卡，想必是這雙手不想要了？本宮瞧著倒也乾淨，不如賞了紅吧。",
-    "別人都在飛，你在原地踏步就算了，怎麼還在往後退？",
-    "你的畫技跟你的存款一樣，一點漲幅都沒有，真讓人心寒。",
-    "你的基本功醜到哭喔。"
-]
+
+    # ---------- 在類別內定義隨機訊息清單 (修正縮排) ----------
+    REMINDER_MESSAGES = [
+        "別人每天都在進步，就你在退步。",
+        "你畫圖這麼醜就是因為都沒在練習。",
+        "花十分鐘練習一下很難嗎？",
+        "今天也想偷懶？幾天了？",
+        "我看你很有天賦，天賦不練習就只是廢物。",
+        "你的筆正在冷宮發霉，它問你什麼時候要翻它牌子。",
+        "你不是沒時間，你只是沒心。",
+        "今天不練習，明天變垃圾。",
+        "你這骨架，竟比那安嬪的嗓子還要難堪，還不快去練練！",
+        "這幾日不打卡，想必是這雙手不想要了？本宮瞧著倒也乾淨，不如賞了紅吧。",
+        "別人都在飛，你在原地踏步就算了，怎麼還在往後退？",
+        "你的畫技跟你的存款一樣，一點漲幅都沒有，真讓人心寒。",
+        "你的基本功醜到哭喔。"
+    ]
+
     # ---------- 背景迴圈 ----------
     async def _reminder_loop(self):
         await self.bot.wait_until_ready()
@@ -61,7 +62,8 @@ REMINDER_MESSAGES = [
                 print(f"下次提醒：{next_run} UTC（{wait_sec:.0f} 秒後）")
                 await asyncio.sleep(wait_sec)
 
-                random_msg = random.choice(REMINDER_MESSAGES)
+                # 修正這裡：使用 self.REMINDER_MESSAGES 來取得清單
+                random_msg = random.choice(self.REMINDER_MESSAGES)
                 await channel.send(f"{role.mention} {random_msg}")
                 print("✅ 已發送每日提醒")
 
@@ -70,7 +72,6 @@ REMINDER_MESSAGES = [
             except Exception as e:
                 print(f"每日提醒錯誤: {e}")
                 await asyncio.sleep(3600)
-
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(DailyReminder(bot))
