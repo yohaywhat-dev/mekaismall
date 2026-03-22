@@ -30,18 +30,25 @@ async def on_ready():
     if guild:
         print(f"🤖 機器人暱稱: {guild.me.display_name}")
 
-    # 同步 Slash Commands
+
+    # 同步 Slash Commands - 優先嘗試伺服器同步，失敗則全局同步
+    sync_success = False
     try:
         await bot.tree.sync(guild=discord.Object(id=GUILD_ID))
         print(f"✅ Slash Commands 已同步到伺服器 {GUILD_ID}")
+        sync_success = True
     except Exception as e:
         print(f"⚠️ 伺服器同步失敗 ({e})，嘗試全局同步...")
         try:
             await bot.tree.sync()
-            print("✅ Slash Commands 已全局同步")
+            print(f"✅ Slash Commands 已全局同步")
+            sync_success = True
         except Exception as e2:
             print(f"❌ 全局同步也失敗: {e2}")
-
+    
+    if not sync_success:
+        print("❌ Slash Commands 同步失敗，指令可能無法使用")
+        
 # ---------- 啟動 ----------
 async def main():
     async with bot:
